@@ -1,8 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
-
+import { StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-native';
+import Card from './Card';
 
 export default function App() {
+  const cards = [
+    { title: 'Exercise', subtitle: '12 tasks', image: require('./assets/young woman working online.png') },
+    { title: 'Study', subtitle: '12 tasks', image: require('./assets/young woman working at desk.png') },
+    { title: 'Dance', subtitle: '5 tasks', image: require('./assets/young woman working online.png') },
+    { title: 'Cook', subtitle: '6 tasks', image: require('./assets/young woman working online.png') },
+    { title: 'Music', subtitle: '15 tasks', image: require('./assets/young woman working online.png') },
+    { title: 'Work', subtitle: '4 tasks', image: require('./assets/young woman working online.png') },
+    { title: 'Eat', subtitle: '20 tasks', image: require('./assets/young woman working online.png') },
+    { title: 'Code', subtitle: '3 tasks', image: require('./assets/young woman working online.png') },
+  ];
   return (
     <View style={styles.container}>
     <View style={styles.customBlock}>
@@ -17,6 +27,10 @@ export default function App() {
         </View>
       </View>
       <View style={styles.searchContainer}>
+      <Image
+            style={styles.magnifyingGlassIcon}
+            source={require('./assets/WhatsApp Image 2024-06-01 at 12.05.37_f514fea9.jpg')}
+        />
         <TextInput
         style={styles.searchBar}
         placeholder="Search"
@@ -26,9 +40,24 @@ export default function App() {
         style={styles.filterIcon}
         source={require('./assets/Filter.png')}
         />
-      </View>
+        </View>
+        <Text style={styles.minititle}>Categories</Text>
     </View>
-  </View>
+    <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.cardsContainer}
+      >
+       {cards.map((card, index) => (
+          <Card 
+            key={index} 
+            title={card.title} 
+            subtitle={card.subtitle} 
+            image={card.image} 
+          />
+        ))}
+      </ScrollView>
+    </View>
   );
 }
 
@@ -73,7 +102,6 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: 'black',
-    
   },
   searchContainer: {
     flexDirection: 'row',
@@ -88,6 +116,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     opacity: 1,
   },
+  magnifyingGlassIcon: {
+    width: 24,
+    height: 24,
+    marginLeft: 10,
+  },
   searchBar: {
     flex: 1,
     paddingLeft: 10,
@@ -98,6 +131,19 @@ const styles = StyleSheet.create({
     width: 24, // Adjust size as needed
     height: 24, // Adjust size as needed
     marginRight: 10,
+  },
+  minititle: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
+    marginTop: 21,
+    marginLeft: 10,
+  },
+  cardsContainer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 260,
+    paddingBottom: 10,
   },
 });
 
